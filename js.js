@@ -2,7 +2,16 @@ let title =document.querySelector('.title');
 let a =document.querySelector('.a');
 let turn = 0;
 let arr=[];
-let x,i;
+let x,i,counter=0;
+function draw()
+{
+    title.innerHTML='';
+    a.innerHTML =' draw ';
+    setInterval(function(){a.innerHTML+='.'},1000);
+    setTimeout(function(){location.reload()},4000)
+    
+}
+
 function end( num1, num2,num3)
 {
 
@@ -31,6 +40,7 @@ function win()
     if(arr[i]==arr[i+1]&&arr[i]==arr[i+2]&&arr[i]!=='')
     {
         end(i,i+1,i+2);
+        return;
     }
 }
 for(i=1;i<4;i++)
@@ -38,17 +48,22 @@ for(i=1;i<4;i++)
 if(arr[i]==arr[i+3]&&arr[i]==arr[i+6]&&arr[i]!=='')
 {
     end(i,i+3,i+6);
+    return;
 }
 }
 if(arr[1]==arr[5]&&arr[1]==arr[9]&&arr[9]!=='')
 {
     end(1,5,9);
+    return;
 }
 if(arr[3]==arr[5]&&arr[3]==arr[7]&&arr[7]!=='')
 {
     end(3,5,7);
+    return;
 }
-
+    else if(counter==8)
+   { draw();
+   }
 }
 function game(id)
 {
@@ -59,6 +74,7 @@ function game(id)
         turn=1;
         title.innerHTML='O';
         win();
+        counter++;
     }
     else if(turn == 1 && element.innerHTML=='')
     {
@@ -66,5 +82,6 @@ function game(id)
         element.innerHTML='O';
         title.innerHTML='X';
         win();
+        counter++;
     }
 } 
